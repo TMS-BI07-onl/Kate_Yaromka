@@ -1,0 +1,71 @@
+-- Вывести поля Name, SellStartDate из таблицы Production.Product и текущую дату и время без смещения часового пояса.
+
+SELECT Name, SellStartDate, SYSDATETIME() AS Current_Date21
+FROM Production.Product
+
+ 
+
+-- Вывести поля Name, SellStartDate из таблицы Production.Product и текущую дату и время со смещением часового пояса.
+
+SELECT Name, SellStartDate, SYSDATETIMEOFFSET() AS Current_Date21
+FROM Production.Product
+
+ 
+
+-- Вывести поля Name, SellStartDate из таблицы Production.Product и текущую дату и время в формате UTC.
+
+SELECT Name, SellStartDate, SYSUTCDATETIME() AS Current_Date21
+FROM Production.Product
+
+ 
+
+--Вывести количество продуктов в разрезе годов из таблицы Production.Product
+
+SELECT DATENAME(year, SellStartDate) AS Year_SellStart, COUNT(1) AS CountProduct 
+FROM Production.Product
+GROUP BY DATENAME(year, SellStartDate)
+
+ 
+
+--Вывести поля Name, SellStartDate из таблицы Production.Product, также текущую дату и время без смещения часового пояса и определить разницу в годах между текущей датой и SellStartDate.
+
+SELECT Name, SellStartDate, SYSDATETIME() Current_Date21 , DATEDIFF(year, SellStartDate, SYSDATETIME()) AS DATEDIFF_SellStart
+FROM Production.Product
+
+ 
+
+--Определить является ли поле SellStartDate таблицы Production.Product допустимым значением даты и времени. Вывести сгруппированные данные - являются/не являются.
+
+SELECT ISDATE(SellStartDate) AS ISDATE_Value, COUNT(1) AS ALL_Value
+FROM Production.Product
+GROUP BY ISDATE(SellStartDate)
+
+-- Вывести контрольную сумму для поля BusinessEntityID таблицы Person.Person
+SELECT CHECKSUM_AGG(BusinessEntityID)		
+FROM Person.Person
+ 
+--Вывести количество уникальных Title из таблицы Person.Person 
+SELECT COUNT_BIG(DISTINCT Title)		
+FROM Person.Person
+ 
+-- Определить являются и выражения в таблицы Person.Person в поле PersonType статическими.
+
+SELECT PersonType, Count(PersonType) AS Count_PT, GROUPING(PersonType) AS Grouping_PT
+FROM Person.Person
+GROUP BY PersonType WITH ROLLUP
+ 
+-- Определить статическое стандартное отклонение по полю StandardCost таблицы Production.Product - как всех значений, так и уникальных.
+
+SELECT STDEV(DISTINCT StandardCost) AS STDEVDIS_StandardCost, STDEV(StandardCost) AS STDEVALL_StandardCost
+FROM Production.Product
+ 
+-- Объединить поля FirstName, MiddleName, LastName таблицы Person.Person.
+SELECT FirstName, MiddleName, LastName, STRING_AGG(CONVERT(NVARCHAR(max), CONCAT(FirstName, ' ', MiddleName, ' ', LastName)), CHAR(13)) AS FULL_Name
+FROM Person.Person
+GROUP BY FirstName, MiddleName, LastName
+ 
+
+-- Вывести статистическую дисперсию значений поля StandardCost таблицы Production.Product - как всех значений, так и уникальных.
+SELECT VAR(DISTINCT StandardCost) AS VARDIS_StandardCost, VAR(StandardCost) AS VARVALL_StandardCost 
+FROM Production.Product
+ 
