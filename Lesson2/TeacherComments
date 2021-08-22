@@ -1,0 +1,23 @@
+Well done! 
+
+4. 
+a) -1 
+Correct answer:	SELECT COUNT(DISTINCT PersonType) AS DistinctCount
+		FROM Person.Person
+		WHERE LastName LIKE 'M%' 
+			OR NOT EmailPromotion LIKE '%1%' 
+You forgot to add count. When the task is about calculating amount of rows, you can't rely on the number in the corner of the window.
+First condition is "starting with M". In your solution it's "equal to M", which is totally not correct.
+Second condition is not "equal", it's "including". For example, if after next data update there is a EmailPromotion 3451654, it should be added to the final result set.
+b)-1
+Correct answer:
+SELECT  TOP 3   *
+FROM Sales.SpecialOffer
+WHERE StartDate BETWEEN '2013-01-01' AND '2014-01-01'
+ORDER BY DiscountPct DESC
+Order by is the most necessary function here. You got wrong results just because of this line.
+e)-0.5
+Having clause is absolutely not needed here. 
+Firstly, we haven't spoken about it yet. Secondly, there is not a single requirement about filtering out null values for weight and size.
+
+Mark: 8.
