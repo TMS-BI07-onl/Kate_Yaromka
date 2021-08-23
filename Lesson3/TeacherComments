@@ -1,0 +1,57 @@
+Well done!
+
+2.
+a)
+Technically, while writing second and third condition for this task you could leave only <100 and <500, because all conditions is being checked in the written order. It's just for your information. :)
+
+c)-0.5
+Correct answer:
+...WHERE pv.BusinessEntityID IS NULL
+Qty is a bad value to compare to NULL, 'cause it can be just NULL in the table, not  after the join.
+
+3.
+a)-1
+Correct answers:
+SELECT Название
+FROM Фирмы-производители 
+WHERE id NOT IN (SELECT преп.id_фирмы
+				FROM Фармпрепараты преп
+						JOIN Продажи прод ON преп.id=прод.id_фармпрепарата
+						JOIN Кассовые_чеки чек ON прод.id_чека=чек.id 
+				WHERE YEAR(Дата)=2019)
+--=
+SELECT преп.id_фирмы
+FROM Фирмы-производители фирма 
+	JOIN Фармпрепараты преп ON фирма.id=преп.id_фирмы
+	JOIN Продажи прод ON преп.id=прод.id_фармпрепарата
+	LEFT JOIN Кассовые_чеки чек ON прод.id_чека=чек.id 
+WHERE YEAR(Дата)=2019 AND чек.id IS NULL
+Your solution will catch an error while processing, because you didn't set the new name for the table in the inner query.
+Please remember that we're not using HAVING with the non-aggregated filters.
+In general your solution finds rows WITH year 2019, not WITHOUT it.
+Also, there is no need to use left joins here.
+
+b)-0.5
+Correct answer:
+SELECT 2*Цена AS Новая_цена
+FROM Фармпрепараты преп
+	JOIN Типы_фармпрепаратов тип ON тип.id=преп.id_типа
+WHERE Тип='А'
+Using left join here you can see medicine with NULL type, which is not required. Medicine name is not required at all.
+
+c)
+It would be better not to base count on the name. Name could include null. You can use id (because it's pk) or 1.
+
+d)
+Expected answer:
+SELECT апт.Название, преп.Название
+FROM Фармпрепараты преп ON произв.id=преп.id_фирмы
+	JOIN Продажи прод ON преп.id=прод.id_фармпрепарата
+	JOIN Кассовые_чеки чек ON прод.id_чека=чек.id
+	JOIN Аптечные_пункты апт ON апт.id=прод.id_аптечного_пункта
+WHERE DATENAME(weekday, чек.Дата)='суббота'
+Pay attention to requirements to select list!
+
+Mark: 5+3
+
+
