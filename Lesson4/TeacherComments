@@ -1,0 +1,15 @@
+Well done!
+
+4.
+e)
+You calculated SUM instead of MAX. 
+
+f) -0.5
+I expected using ISNULL function for TerritoryGroup for replacing nulls. Your solution would be correct even without this function, if you used CONCAT function for login. In your case it returns NULL login for some persons and you're filtering them out. It leads you to the wrong answer.
+It wasn't stated in the task to the letter, but top raiting means ordering by desc.
+Also, you don't need to use global ORDER BY when using window functions with ORDER BY. They will filter the whole result set.
+
+g)-0.5
+Your solution returns just the first day of each month, not the first working day.
+
+Mark:9.
