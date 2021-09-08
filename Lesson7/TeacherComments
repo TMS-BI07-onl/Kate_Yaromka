@@ -1,0 +1,16 @@
+Well done!
+
+A, C -1
+We can't store set of ids in one cell, it's breaking the 1nf.
+
+D -1
+I don't see the answer
+
+E -1
+In your solution you loose the city for a person. You can find the province and all cities in this province, but there is no connection between person and city. 
+
+F
+order_number can be identity, it's just selected in some order, that we don't know. Also, don't forget that PK is not always an identity, even newid can also be a PK.
+
+
+Mark: 7
