@@ -1,0 +1,22 @@
+
+SELECT CONCAT(PP.FirstName, ' ', PP.MiddleName, ' ', PP.LastName) AS FIO_person, Ph.PhoneNumber
+FROM Person.Person PP
+INNER JOIN Person.PersonPhone Ph
+ON PP.BusinessEntityID = Ph.BusinessEntityID
+WHERE Ph.PhoneNumber LIKE '4_5%'
+
+
+SELECT BusinessEntityID, NationalIDNumber, DATEDIFF(YEAR, getdate(), BirthDate) * (-1) AS Age,
+CASE 
+		WHEN DATEDIFF(YEAR, getdate(), BirthDate) * (-1) > 17 AND  DATEDIFF(YEAR, getdate(), BirthDate) * (-1) < 20 THEN 'Adolescence'
+		WHEN DATEDIFF(YEAR, getdate(), BirthDate) * (-1) > 21 AND  DATEDIFF(YEAR, getdate(), BirthDate) * (-1) < 59 THEN 'Adults'
+		WHEN DATEDIFF(YEAR, getdate(), BirthDate) * (-1) > 60 AND  DATEDIFF(YEAR, getdate(), BirthDate) * (-1) < 75 THEN 'Elderly'
+		WHEN DATEDIFF(YEAR, getdate(), BirthDate) * (-1) > 76 AND  DATEDIFF(YEAR, getdate(), BirthDate) * (-1) < 90 THEN 'Senile'
+	END
+FROM HumanResources.Employee
+
+
+SELECT Color, MAX(StandardCost) AS MAX_Cost
+FROM Production.Product
+WHERE StandardCost = (SELECT MAX(StandardCost) FROM Production.Product)
+GROUP BY Color
