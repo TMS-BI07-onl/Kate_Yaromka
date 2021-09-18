@@ -1,0 +1,6 @@
+Well done!
+
+I really think that Group by and Having is useless in the inner query. I got the idea, it decreases the amount of data that needs to be processed. But I think that grouping is more difficult operation that searching through the data.
+
+Mark: 10
+Test mark: 8
