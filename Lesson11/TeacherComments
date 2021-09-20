@@ -1,0 +1,16 @@
+Well done!
+
+Homework
+I would suggest to use IS NOT NULL filter, not !='', it's not really professional. :)
+
+Test
+1
+-2
+Your most inner query is returning one number - just count of all sold travels last year. You can't divide it on the next step. You also don't even have Idk, by which you want to group. Query will return an error.
+
+2
+You should imagine companies and countries names.The problem can erase on step of calculating KPI in Pivot, because I didn't name what to calculate.
+The task was not really correct, I'm sorry.
+
+Mark:10
+Test: 8
