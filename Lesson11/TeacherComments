@@ -1,0 +1,14 @@
+Well done!
+
+Homework
+I would suggest to use IS NOT NULL filter, not !='', it's not really professional. :)
+
+Test
+1
+I expected solution for finding most frquent customer for EACH agency.
+2
+You should imagine companies and countries names.The problem can erase on step of calculating KPI in Pivot, because I didn't name what to calculate.
+The task was not really correct, I'm sorry.
+
+Mark:10
+Test: 10
