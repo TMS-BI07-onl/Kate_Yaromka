@@ -1,0 +1,39 @@
+-- 1. Найти ProductSubcategoryID из Production.Product, где мин вес такого ProductSubcategoryID больше 150.
+
+SELECT * 
+FROM
+(
+SELECT DISTINCT p1.ProductSubcategoryID, MIN(p1.Weight) AS MIN_W
+FROM Production.Product p1
+GROUP BY p1.ProductSubcategoryID
+) t
+WHERE t.MIN_W > 150
+
+--2. Найти самый дорогой продукт (поле StandardCost) из Production.Product. (4 способа)
+
+SELECT Name, MAX(StandardCost) AS MAX_Cost
+FROM Production.Product
+WHERE StandardCost = (SELECT MAX(StandardCost) FROM Production.Product)
+GROUP BY Name
+
+
+-- 3. Найти заплывы, для которых не указан бассейн.
+
+SELECT PC.CompetitionId
+FROM Place.Сompetition PC
+INNER JOIN Place.BridgeCompetition_Venue BCCV 
+     ON PC.CompetitionId = BCCV.СompetitionId
+INNER Place.CompetitionVenue PCV
+	ON BCCV.CompetitionVenueId = PCV.CompetitionVenueId
+WHERE PCV.CompetitionVenueName IS NULL
+
+
+-- 4. Найти для каждого судьи кол-во проведенных судейств за последние 15 лет.  (схема GROUP1)
+
+SELECT FirstName, LastName
+FROM Judges J
+JOIN Bridge_Swimmer_Coach BSC
+ON J.JudgeID=BSC.JudgeId
+JOIN Competition C
+ON BSC.CompetitionId = C.CompetitionId
+WHERE YEAR(Date) < YEAR)GETDATE())-15
