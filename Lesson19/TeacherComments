@@ -1,0 +1,6 @@
+Well done!
+
+Task 2. -1
+Because of using count instead of count (distinct) you've got the incorrect result.
+
+Mark: 9.
